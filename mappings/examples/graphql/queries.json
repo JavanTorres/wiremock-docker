@@ -1,0 +1,38 @@
+{
+    "priority": 5,
+    "request": {
+        "url": "/graphql",
+        "method": "POST",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.query =~ /.*user\\(.*id.*/i)]"
+            },
+            {
+                "matchesJsonPath": "$.variables.id"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "data": {
+                "user": {
+                    "id": "{{jsonPath request.body '$.variables.id'}}",
+                    "name": "User_{{randomValue length=8 type='ALPHANUMERIC'}}",
+                    "email": "user{{randomValue length=6 type='NUMERIC'}}@example.com",
+                    "cep": "{{randomValue length=8 type='NUMERIC'}}",
+                    "createdAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+                }
+            }
+        },
+        "transformers": ["response-template"]
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "request": {
+        "url": "/api/timeout",
+        "method": "GET"
+    },
+    "response": {
+        "status": 200,
+        "fixedDelayMilliseconds": 10000,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "message": "This response will timeout (10s delay)"
+        }
+    }
+}

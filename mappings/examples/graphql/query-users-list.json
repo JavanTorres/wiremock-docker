@@ -1,0 +1,50 @@
+{
+    "request": {
+        "url": "/graphql",
+        "method": "POST",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.query =~ /.*users.*/i)]"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "data": {
+                "users": [
+                    {
+                        "id": "1",
+                        "name": "User_{{randomValue length=8 type='ALPHANUMERIC'}}",
+                        "email": "user{{randomValue length=6 type='NUMERIC'}}@example.com",
+                        "cep": "{{randomValue length=8 type='NUMERIC'}}",
+                        "createdAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+                    },
+                    {
+                        "id": "2",
+                        "name": "User_{{randomValue length=8 type='ALPHANUMERIC'}}",
+                        "email": "user{{randomValue length=6 type='NUMERIC'}}@example.com",
+                        "cep": "{{randomValue length=8 type='NUMERIC'}}",
+                        "createdAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+                    },
+                    {
+                        "id": "3",
+                        "name": "User_{{randomValue length=8 type='ALPHANUMERIC'}}",
+                        "email": "user{{randomValue length=6 type='NUMERIC'}}@example.com",
+                        "cep": "{{randomValue length=8 type='NUMERIC'}}",
+                        "createdAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+                    }
+                ]
+            }
+        },
+        "transformers": ["response-template"]
+    }
+}

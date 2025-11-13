@@ -1,0 +1,122 @@
+# GraphQL Tests for WireMock - User CRUD
+# Using 'REST Client' plugin for VS Code
+
+@graphqlUrl = http://localhost:8090/graphql
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzMxNDMxNDc3LCJleHAiOjE3MzE0NzQ2Nzd9
+
+### ========================================
+### GraphQL Queries - Users
+### ========================================
+
+### Query - List All Users
+POST {{graphqlUrl}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+    "query": "query GetUsers { users { id name email cep createdAt } }"
+}
+
+### Query - Get User by ID
+POST {{graphqlUrl}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+    "query": "query GetUser($id: ID!) { user(id: $id) { id name email cep createdAt } }",
+    "variables": {
+        "id": "123"
+    }
+}
+
+### Query - Get Another User by ID
+POST {{graphqlUrl}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+    "query": "query GetUser($id: ID!) { user(id: $id) { id name email cep createdAt } }",
+    "variables": {
+        "id": "456"
+    }
+}
+
+### ========================================
+### GraphQL Mutations - Users
+### ========================================
+
+### Mutation - Create User
+POST {{graphqlUrl}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+    "query": "mutation CreateUser($input: CreateUserInput!) { createUser(input: $input) { id name email cep createdAt } }",
+    "variables": {
+        "input": {
+            "name": "João Silva",
+            "email": "joao.silva@example.com",
+            "cep": "12345678"
+        }
+    }
+}
+
+### Mutation - Create Another User
+POST {{graphqlUrl}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+    "query": "mutation CreateUser($input: CreateUserInput!) { createUser(input: $input) { id name email cep createdAt } }",
+    "variables": {
+        "input": {
+            "name": "Maria Santos",
+            "email": "maria.santos@example.com",
+            "cep": "98765432"
+        }
+    }
+}
+
+### Mutation - Update User
+POST {{graphqlUrl}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+    "query": "mutation UpdateUser($id: ID!, $input: UpdateUserInput!) { updateUser(id: $id, input: $input) { id name email cep updatedAt } }",
+    "variables": {
+        "id": "123",
+        "input": {
+            "name": "João Silva Atualizado",
+            "email": "joao.updated@example.com",
+            "cep": "11111111"
+        }
+    }
+}
+
+### Mutation - Update User Email Only
+POST {{graphqlUrl}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+    "query": "mutation UpdateUser($id: ID!, $input: UpdateUserInput!) { updateUser(id: $id, input: $input) { id name email cep updatedAt } }",
+    "variables": {
+        "id": "456",
+        "input": {
+            "email": "new.email@example.com"
+        }
+    }
+}
+
+### Mutation - Delete User
+POST {{graphqlUrl}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+    "query": "mutation DeleteUser($id: ID!) { deleteUser(id: $id) { success message } }",
+    "variables": {
+        "id": "789"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "request": {
+        "url": "/api/server-error",
+        "method": "GET"
+    },
+    "response": {
+        "status": 500,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "error": "Internal Server Error",
+            "message": "An unexpected error occurred on the server",
+            "code": 500,
+            "timestamp": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "request": {
+        "url": "/api/slow-endpoint",
+        "method": "GET"
+    },
+    "response": {
+        "status": 200,
+        "fixedDelayMilliseconds": 1000,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "message": "This response took 1 seconds to complete",
+            "timestamp": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+        }
+    }
+}

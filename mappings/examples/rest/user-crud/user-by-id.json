@@ -1,0 +1,20 @@
+{
+    "request": {
+        "urlPathPattern": "/api/users/[0-9]+",
+        "method": "GET"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "id": "{{request.pathSegments.[2]}}",
+            "name": "User_{{randomValue length=8 type='ALPHANUMERIC'}}",
+            "email": "user{{randomValue length=6 type='NUMERIC'}}@example.com",
+            "cep": "{{randomValue length=8 type='NUMERIC'}}"
+        },
+        "transformers": ["response-template"]
+    }
+}
+

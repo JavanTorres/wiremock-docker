@@ -1,0 +1,33 @@
+{
+    "request": {
+        "url": "/api/users",
+        "method": "GET"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": [
+            {
+                "id": "1",
+                "name": "User_{{randomValue length=8 type='ALPHANUMERIC'}}",
+                "email": "user{{randomValue length=6 type='NUMERIC'}}@example.com",
+                "cep": "{{randomValue length=8 type='NUMERIC'}}"
+            },
+            {
+                "id": "2",
+                "name": "User_{{randomValue length=8 type='ALPHANUMERIC'}}",
+                "email": "user{{randomValue length=6 type='NUMERIC'}}@example.com",
+                "cep": "{{randomValue length=8 type='NUMERIC'}}"
+            },
+            {
+                "id": "3",
+                "name": "User_{{randomValue length=8 type='ALPHANUMERIC'}}",
+                "email": "user{{randomValue length=6 type='NUMERIC'}}@example.com",
+                "cep": "{{randomValue length=8 type='NUMERIC'}}"
+            }
+        ],
+        "transformers": ["response-template"]
+    }
+}

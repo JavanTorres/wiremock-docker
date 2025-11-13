@@ -1,0 +1,20 @@
+{
+    "request": {
+        "urlPathPattern": "/api/users/[0-9]+",
+        "method": "PATCH"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "id": "{{request.pathSegments.[2]}}",
+            "name": "{{#if (jsonPath request.body '$.name')}}{{jsonPath request.body '$.name'}}{{else}}User_{{randomValue length=8 type='ALPHANUMERIC'}}{{/if}}",
+            "email": "{{#if (jsonPath request.body '$.email')}}{{jsonPath request.body '$.email'}}{{else}}user{{randomValue length=6 type='NUMERIC'}}@example.com{{/if}}",
+            "cep": "{{#if (jsonPath request.body '$.cep')}}{{jsonPath request.body '$.cep'}}{{else}}{{randomValue length=8 type='NUMERIC'}}{{/if}}",
+            "updatedAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+        },
+        "transformers": ["response-template"]
+    }
+}

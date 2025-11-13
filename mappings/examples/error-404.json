@@ -1,0 +1,17 @@
+{
+    "request": {
+        "url": "/api/not-found",
+        "method": "GET"
+    },
+    "response": {
+        "status": 404,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "error": "Not Found",
+            "message": "The requested resource was not found",
+            "code": 404
+        }
+    }
+}

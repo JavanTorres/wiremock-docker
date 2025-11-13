@@ -1,0 +1,12 @@
+{
+    "request": {
+        "urlPathPattern": "/api/users/[0-9]+",
+        "method": "DELETE"
+    },
+    "response": {
+        "status": 204,
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

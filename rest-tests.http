@@ -1,0 +1,85 @@
+# Using 'REST Client' plugin for VS Code
+
+@restlUrl = http://localhost:8090
+
+### Health Check - Success (200)
+GET {{restlUrl}}/api/health-check HTTP/1.1
+
+### Error 404 - Not Found
+GET {{restlUrl}}/api/not-found HTTP/1.1
+
+### Error 400 - Bad Request
+POST {{restlUrl}}/api/bad-request HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "JAVAN",
+    "email": "javan@example.com"
+}
+
+### Error 500 - Internal Server Error
+GET {{restlUrl}}/api/server-error HTTP/1.1
+
+### Slow Response (1s delay)
+GET {{restlUrl}}/api/slow-endpoint HTTP/1.1
+
+### Timeout Error (10s delay - will likely timeout)
+GET {{restlUrl}}/api/timeout HTTP/1.1
+
+### ========================================
+### CRUD - Users
+### ========================================
+
+### LIST - Get All Users
+GET {{restlUrl}}/api/users HTTP/1.1
+
+### READ - Get User by ID (Random Data)
+GET {{restlUrl}}/api/users/123 HTTP/1.1
+
+### READ - Get User by ID (Another User)
+GET {{restlUrl}}/api/users/456 HTTP/1.1
+
+### READ - Get User Not Found (ID 999)
+GET {{restlUrl}}/api/users/999 HTTP/1.1
+
+### CREATE - Create New User (Success)
+POST {{restlUrl}}/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "João Silva",
+    "email": "joao.silva@example.com",
+    "cep": "12345678"
+}
+
+### CREATE - Create New User (Missing CEP - Should fail with 400)
+POST {{restlUrl}}/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Maria Santos",
+    "email": "maria.santos@example.com"
+}
+
+### UPDATE - Update User (PUT - Full Update)
+PUT {{restlUrl}}/api/users/123 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "João Silva Updated",
+    "email": "joao.updated@example.com",
+    "cep": "98765432"
+}
+
+### UPDATE - Partial Update User (PATCH)
+PATCH {{restlUrl}}/api/users/456 HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "new.email@example.com"
+}
+
+### DELETE - Delete User
+DELETE {{restlUrl}}/api/users/789 HTTP/1.1
+
+

@@ -1,0 +1,35 @@
+{
+    "priority": 1,
+    "request": {
+        "url": "/graphql",
+        "method": "POST",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.query =~ /mutation.*deleteUser.*/i)]"
+            },
+            {
+                "matchesJsonPath": "$.variables.id"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "data": {
+                "deleteUser": {
+                    "success": true,
+                    "message": "User deleted successfully"
+                }
+            }
+        },
+        "transformers": ["response-template"]
+    }
+}

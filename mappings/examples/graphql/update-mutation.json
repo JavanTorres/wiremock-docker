@@ -1,0 +1,38 @@
+{
+    "priority": 2,
+    "request": {
+        "url": "/graphql",
+        "method": "POST",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.query =~ /mutation.*updateUser.*/i)]"
+            },
+            {
+                "matchesJsonPath": "$.variables.id"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "data": {
+                "updateUser": {
+                    "id": "{{jsonPath request.body '$.variables.id'}}",
+                    "name": "{{jsonPath request.body '$.variables.input.name'}}",
+                    "email": "{{jsonPath request.body '$.variables.input.email'}}",
+                    "cep": "{{jsonPath request.body '$.variables.input.cep'}}",
+                    "updatedAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+                }
+            }
+        },
+        "transformers": ["response-template"]
+    }
+}

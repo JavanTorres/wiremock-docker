@@ -1,0 +1,20 @@
+{
+    "priority": 10,
+    "request": {
+        "urlPathPattern": "/api/users/999",
+        "method": "GET"
+    },
+    "response": {
+        "status": 404,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "error": "Not Found",
+            "message": "User with ID 999 not found",
+            "code": 404,
+            "timestamp": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+        },
+        "transformers": ["response-template"]
+    }
+}

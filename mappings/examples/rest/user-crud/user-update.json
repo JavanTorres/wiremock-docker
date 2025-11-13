@@ -1,0 +1,28 @@
+{
+    "request": {
+        "urlPathPattern": "/api/users/[0-9]+",
+        "method": "PUT",
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$.name"
+            },
+            {
+                "matchesJsonPath": "$.email"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "id": "{{request.pathSegments.[2]}}",
+            "name": "{{jsonPath request.body '$.name'}}",
+            "email": "{{jsonPath request.body '$.email'}}",
+            "cep": "{{jsonPath request.body '$.cep'}}",
+            "updatedAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+        },
+        "transformers": ["response-template"]
+    }
+}

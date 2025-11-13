@@ -1,0 +1,44 @@
+{
+    "priority": 3,
+    "request": {
+        "url": "/graphql",
+        "method": "POST",
+        "headers": {
+            "Content-Type": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.query =~ /mutation.*createUser.*/i)]"
+            },
+            {
+                "matchesJsonPath": "$.variables.input.name"
+            },
+            {
+                "matchesJsonPath": "$.variables.input.email"
+            },
+            {
+                "matchesJsonPath": "$.variables.input.cep"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "data": {
+                "createUser": {
+                    "id": "{{randomValue length=3 type='NUMERIC'}}",
+                    "name": "{{jsonPath request.body '$.variables.input.name'}}",
+                    "email": "{{jsonPath request.body '$.variables.input.email'}}",
+                    "cep": "{{jsonPath request.body '$.variables.input.cep'}}",
+                    "createdAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+                }
+            }
+        },
+        "transformers": ["response-template"]
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "request": {
+        "url": "/api/bad-request",
+        "method": "POST",
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$.name"
+            },
+            {
+                "matchesJsonPath": "$.email"
+            },
+            {
+                "doesNotMatch": "$.cep"
+            }
+        ]
+    },
+    "response": {
+        "status": 400,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "error": "Bad Request",
+            "message": "Missing required field",
+            "code": 400,
+            "details": [
+                "Field 'cep' is required"
+            ]
+        }
+    }
+}
