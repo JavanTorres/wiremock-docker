@@ -17,8 +17,7 @@
     "response": {
         "status": 201,
         "headers": {
-            "Content-Type": "application/json",
-            "Location": "/api/users/{{randomValue length=3 type='NUMERIC'}}"
+            "Content-Type": "application/json"
         },
         "jsonBody": {
             "id": "{{randomValue length=3 type='NUMERIC'}}",

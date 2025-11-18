@@ -1,0 +1,28 @@
+{
+    "priority": 1,
+    "request": {
+        "url": "/api/users",
+        "method": "POST",
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$.name"
+            },
+            {
+                "matchesJsonPath": "$.email"
+            },
+            {
+                "matchesJsonPath": "$[?(!@.cep)]"
+            }
+        ]
+    },
+    "response": {
+        "status": 400,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "error": "Bad Request",
+            "message": "Missing required field: cep"
+        }
+    }
+}
